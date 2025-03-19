@@ -1,30 +1,21 @@
 <template>
-  <div class="SysNav">
-    <div
-      :class="[
-        'SysNav_main',
-        judVarIsBoolean(isOpen) && isOpen && 'SysNav_main-isOpen',
-        judVarIsBoolean(isOpen) && !isOpen && 'SysNav_main-isClose'
-      ]"
-    >
+  <div :class="[
+    'SysNav',
+    judVarIsBoolean(isOpen) && isOpen && 'SysNav-isOpen',
+    judVarIsBoolean(isOpen) && !isOpen && 'SysNav-isClose'
+  ]">
+    <div class="SysNav_main">
       <ul class="SysNav_main_list">
         <li v-for="item in menuList" :key="item.key" class="SysNav_main_list_item" @click="goToUrl(item.url)">
-          <img src="@/assets/images/system.png" alt="" />
+          <img src="@/assets/images/menu-s.png" alt="" />
           <p style="color: #000000">{{ item.name }}</p>
         </li>
       </ul>
-      <div
-        :class="[
-          'SysNav_main_icon',
-          judVarIsBoolean(isOpen) && isOpen && 'SysNav_main_icon-isOpen',
-          judVarIsBoolean(isOpen) && !isOpen && 'SysNav_main_icon-isClose'
-        ]"
-        @click="handleNavOpen()"
-      >
-        <img v-if="isOpen" src="@/assets/images/turnUp.png" alt="" />
-        <img v-else src="@/assets/images/turnDown.png" alt="" />
-      </div>
     </div>
+  </div>
+  <div class='SysNavIcon' @click="handleNavOpen()">
+    <img v-if="isOpen" src="@/assets/images/closeIcon.png" alt="" />
+    <img v-else src="@/assets/images/menuIcon.png" alt="" />
   </div>
 </template>
 

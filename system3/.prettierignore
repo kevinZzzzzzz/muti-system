@@ -4,6 +4,6 @@
 
 **/*.svg
 **/*.sh
-
+/src/views/proTable/useProTable/index.vue
 /public/*
 stats.html

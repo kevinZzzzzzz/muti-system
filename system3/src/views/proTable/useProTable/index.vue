@@ -1,20 +1,15 @@
 <template>
   <div class="table-box">
-    <ProTable
-      ref="proTable"
-      :columns="columns"
-      :request-api="getTableList"
-      :init-param="initParam"
-      :data-callback="dataCallback"
-      @drag-sort="sortTable"
-    >
+    <ProTable ref="proTable" :columns="columns" :request-api="getTableList" :init-param="initParam"
+      :data-callback="dataCallback" @drag-sort="sortTable">
       <!-- 表格 header 按钮 -->
       <template #tableHeader="scope">
         <el-button v-auth="'add'" type="primary" :icon="CirclePlus" @click="openDrawer('新增')">新增用户</el-button>
         <el-button v-auth="'batchAdd'" type="primary" :icon="Upload" plain @click="batchAdd">批量添加用户</el-button>
         <el-button v-auth="'export'" type="primary" :icon="Download" plain @click="downloadFile">导出用户数据</el-button>
         <el-button type="primary" plain @click="toDetail">To 子集详情页面</el-button>
-        <el-button type="danger" :icon="Delete" plain :disabled="!scope.isSelected" @click="batchDelete(scope.selectedListIds)">
+        <el-button type="danger" :icon="Delete" plain :disabled="!scope.isSelected"
+          @click="batchDelete(scope.selectedListIds)">
           批量删除用户
         </el-button>
       </template>
@@ -23,16 +18,17 @@
         {{ scope.row }}
       </template>
       <!-- usernameHeader -->
-      <template #usernameHeader="scope">
+      <!-- <template #usernameHeader="scope">
         <el-button type="primary" @click="ElMessage.success('我是通过作用域插槽渲染的表头')">
           {{ scope.column.label }}
         </el-button>
-      </template>
+      </template> -->
       <!-- createTime -->
       <template #createTime="scope">
-        <el-button type="primary" link @click="ElMessage.success('我是通过作用域插槽渲染的内容')">
+        {{ scope.row.createTime }}
+        <!-- <el-button type="primary" link @click="ElMessage.success('我是通过作用域插槽渲染的内容')">
           {{ scope.row.createTime }}
-        </el-button>
+        </el-button> -->
       </template>
       <!-- 表格操作 -->
       <template #operation="scope">
@@ -59,7 +55,7 @@ import ProTable from "@/components/ProTable/index.vue";
 import ImportExcel from "@/components/ImportExcel/index.vue";
 import UserDrawer from "@/views/proTable/components/UserDrawer.vue";
 import { ProTableInstance, ColumnProps, HeaderRenderScope } from "@/components/ProTable/interface";
-import { CirclePlus, Delete, EditPen, Download, Upload, Refresh } from "@element-plus/icons-vue";
+import { CirclePlus, Delete, EditPen, Download, Upload, View, Refresh } from "@element-plus/icons-vue";
 import {
   getUserList,
   deleteUser,
@@ -193,7 +189,7 @@ const columns = reactive<ColumnProps<User.ResUserList>[]>([
   {
     prop: "createTime",
     label: "创建时间",
-    headerRender,
+    // headerRender,
     width: 180,
     search: {
       el: "date-picker",

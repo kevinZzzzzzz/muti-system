@@ -1,37 +1,38 @@
 .SysNav {
   position: fixed;
-  top: 0;
+  top: 55px;
   left: 0;
   z-index: 999;
-  width: 100vw;
-  height: 64px;
-  background-color: #ffffff;
-  transform: translateY(-100%);
+  height: calc(100vh - 55px);
+  transform: translateX(-100%);
   &_main {
+    width: 210px;
     position: relative;
     height: 100%;
     background-color: #ffffff;
     border-bottom: 1px solid #e8e8e8;
     &_list {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
+      // justify-content: center;
       height: 100%;
-      padding: 0;
+      padding: 20px 0;
       margin: 0;
       list-style: none;
       li {
+        width: 100%;
         display: flex;
-        flex-direction: column;
+        // flex-direction: column;
         align-items: center;
-        justify-content: center;
-        padding: 4px;
-        margin: 0 16px;
+        justify-content: flex-start;
+        padding: 6px 10px;
+        box-sizing: border-box;
         cursor: pointer;
         img {
-          width: 24px;
-          height: 24px;
-          margin-bottom: 4px;
+          width: 32px;
+          height: 32px;
+          margin-right: 4px;
         }
       }
       li:hover {
@@ -39,55 +40,53 @@
         border-radius: 10px;
       }
     }
-    &_icon {
-      position: absolute;
-      right: 3%;
-      bottom: -50%;
-      width: 30px;
-      height: 30px;
-      cursor: pointer;
-      background-color: #ffffff;
-      border-radius: 50%;
-      img {
-        width: 100%;
-        height: 100%;
-      }
-      &-isOpen {
-        transform: translateY(-50%);
-      }
-      &-isClose {
-        transform: translateY(0%);
-      }
-    }
-    &-isOpen {
-      transform: translateY(100%);
-      animation: move-in 1s;
-    }
-    &-isClose {
-      transform: translateY(0%);
-      animation: move-out 1s;
-    }
+  }
+  &-isOpen {
+    transform: translateX(0%);
+    animation: move-in 1s;
+  }
+  &-isClose {
+    transform: translateX(-100%);
+    animation: move-out 1s;
+  }
+}
+.SysNavIcon {
+  z-index: 999;
+  position: fixed;
+  left: 10px;
+  top: 12px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  background-color: var(--el-color-primary);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    width: 80%;
+    height: 80%;
   }
 }
 
 @keyframes move-in {
   from {
     opacity: 0;
-    transform: translateY(-100%); /* 初始 位置：透明且向下偏移 */
+    transform: translateX(-100%); /* 初始 位置：透明且向下偏移 */
   }
   to {
     opacity: 1;
-    transform: translateY(100%); /* 结束位置：完全可见且返回原位 */
+    transform: translateX(0%); /* 结束位置：完全可见且返回原位 */
   }
 }
 
 @keyframes move-out {
   from {
     opacity: 1;
-    transform: translateY(100%); /* 初始位置：透明且向下偏移 */
+    transform: translateX(0%); /* 初始位置：透明且向下偏移 */
   }
   to {
     opacity: 0;
-    transform: translateY(-100%); /* 结束位置：完全可见且返回原位 */
+    transform: translateX(-100%); /* 结束位置：完全可见且返回原位 */
   }
 }
