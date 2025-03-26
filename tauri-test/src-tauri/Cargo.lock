@@ -2705,9 +2705,9 @@ checksum = "925383efa346730478fb4838dbe9137d2a47675ad789c546d150a6e1dd4ab31c"
 
 [[package]]
 name = "printers"
-version = "2.0.0"
+version = "2.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "601970f11a0c22e37e10f0e7432c4926e714f04f020ad8f87d9784e051311d2d"
+checksum = "3e7ca3921508232c8c5e4b7d7b78b5b36024a606a6583e9214332e2ed9e256bb"
 dependencies = [
  "libc",
 ]
