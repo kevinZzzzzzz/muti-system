@@ -18,7 +18,9 @@ pub fn get_printer_list() -> Vec<PrinterInfo> {
             name: printer.name.clone(),
             driver: Some(printer.driver_name.clone()),
             state: Some(format!("{:?}", printer.state)),
-            is_default: default_printer.as_ref().map_or(false, |default| printer.name == default.name),
+            is_default: default_printer
+                .as_ref()
+                .map_or(false, |default| printer.name == default.name),
         })
         .collect()
 }

@@ -22,8 +22,13 @@
     }
   },
   "bundle": {
+    "targets": "msi",
     "windows": {
-      "wix": null
+      "wix": {
+        "template": null,
+        "bannerPath": null,
+        "dialogImagePath": null
+      }
     },
     "active": false,
     "icon": [

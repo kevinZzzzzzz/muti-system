@@ -1,40 +1,62 @@
-<script setup lang="ts">
-import { ref } from "vue";
-import { invoke } from "@tauri-apps/api/core";
-
-const greetMsg = ref("");
-const name = ref("");
-
-async function greet() {
-  // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-  greetMsg.value = await invoke("greet", { name: name.value });
-}
-</script>
-
 <template>
   <main class="container">
     <h1>Welcome to Tauri + Vue</h1>
-
-    <div class="row">
-      <a href="https://vitejs.dev" target="_blank">
-        <img src="/vite.svg" class="logo vite" alt="Vite logo" />
-      </a>
-      <a href="https://tauri.app" target="_blank">
-        <img src="/tauri.svg" class="logo tauri" alt="Tauri logo" />
-      </a>
-      <a href="https://vuejs.org/" target="_blank">
-        <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-      </a>
-    </div>
-    <p>Click on the Tauri, Vite, and Vue logos to learn more.</p>
 
     <form class="row" @submit.prevent="greet">
       <input id="greet-input" v-model="name" placeholder="Enter a name..." />
       <button type="submit">Greet</button>
     </form>
     <p>{{ greetMsg }}</p>
+    <div class="block1">
+      <el-button type="success" @click="handleMsg">消息提示</el-button>
+    </div>
+    <br>
+    <div class="block2">
+      <el-select v-model="printer" placeholder="请选择打印机" style="width: 200px">
+        <el-option v-for="item in printersList" :key="item.name" :label="item.name" :value="item.name">
+        </el-option>
+      </el-select>
+      <el-button type="primary">打印</el-button>
+    </div>
   </main>
 </template>
+<script setup lang="ts">
+import { onMounted, ref } from "vue";
+import { invoke } from "@tauri-apps/api/core";
+import { active, isPermissionGranted, sendNotification, requestPermission } from '@tauri-apps/plugin-notification';
+
+const greetMsg = ref<string>("");
+const name = ref<string>("");
+const printersList = ref<any>([]);
+const printer = ref<string>('');
+
+async function greet() {
+  greetMsg.value = await invoke("greet", { name: name.value }) as string;
+}
+async function getPrintersList() {
+  printersList.value = await invoke("get_printer_list");
+  printer.value = printersList.value.filter((d: any) => { return !!d.is_default })[0].name
+  console.log(printersList.value, 'printersList.value0000000000000')
+}
+const handleMsg = async () => {
+  // const activeNotifications = await active();
+  // console.log(123123, activeNotifications)
+  sendNotification({
+    title: 'New Image',
+    body: 'Check out this picture'
+  });
+}
+onMounted(async () => {
+  getPrintersList()
+  let permissionGranted = await isPermissionGranted();
+  if (!permissionGranted) {
+    const permission = await requestPermission();
+    permissionGranted = permission === 'granted';
+  }
+
+  console.log(permissionGranted, 'permissionGranted')
+})
+</script>
 
 <style scoped>
 .logo.vite:hover {
@@ -44,7 +66,6 @@ async function greet() {
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #249b73);
 }
-
 </style>
 <style>
 :root {
@@ -123,6 +144,7 @@ button {
 button:hover {
   border-color: #396cd8;
 }
+
 button:active {
   border-color: #396cd8;
   background-color: #e8e8e8;
@@ -152,9 +174,9 @@ button {
     color: #ffffff;
     background-color: #0f0f0f98;
   }
+
   button:active {
     background-color: #0f0f0f69;
   }
 }
-
 </style>
