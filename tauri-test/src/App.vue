@@ -36,14 +36,14 @@ async function greet() {
 async function getPrintersList() {
   printersList.value = await invoke("get_printer_list");
   printer.value = printersList.value.filter((d: any) => { return !!d.is_default })[0].name
-  console.log(printersList.value, 'printersList.value0000000000000')
+  console.log(printersList.value, 'printersList.')
 }
 const handleMsg = async () => {
   // const activeNotifications = await active();
   // console.log(123123, activeNotifications)
   sendNotification({
-    title: 'New Image',
-    body: 'Check out this picture'
+    title: '新窗口消息',
+    body: 'hello world!!!!!'
   });
 }
 onMounted(async () => {
