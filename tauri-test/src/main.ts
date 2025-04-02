@@ -8,7 +8,7 @@ import { invoke } from "@tauri-apps/api/core"
 // element plus
 import ElementPlus from "element-plus"
 // element icons
-import * as Icons from "@element-plus/icons-vue"
+// import * as Icons from "@element-plus/icons-vue"
 
 // const invoke = window.__TAURI__.core.invoke
 invoke("my_custom_command", { invokeMessage: "hello from invoke" })

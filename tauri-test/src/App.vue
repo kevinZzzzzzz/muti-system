@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { invoke } from "@tauri-apps/api/core";
-import { active, isPermissionGranted, sendNotification, requestPermission } from '@tauri-apps/plugin-notification';
+import { isPermissionGranted, sendNotification, requestPermission } from '@tauri-apps/plugin-notification';
 
 const greetMsg = ref<string>("");
 const name = ref<string>("");

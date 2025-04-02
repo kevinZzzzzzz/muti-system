@@ -22,15 +22,16 @@
     }
   },
   "bundle": {
-    "targets": "msi",
+    "targets": "nsis",
     "windows": {
       "wix": {
+        "language": "zh-CN",
         "template": null,
         "bannerPath": null,
         "dialogImagePath": null
       }
     },
-    "active": false,
+    "active": true,
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
