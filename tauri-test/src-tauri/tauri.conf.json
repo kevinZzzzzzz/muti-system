@@ -19,10 +19,16 @@
     ],
     "security": {
       "csp": null
+    },
+    "trayIcon": {
+      "iconPath": "icons/icon.ico",
+      "iconAsTemplate": true,
+      "title": "text",
+      "tooltip": "text"
     }
   },
   "bundle": {
-    "targets": "nsis",
+    "targets": "msi",
     "windows": {
       "wix": {
         "language": "zh-CN",
@@ -39,5 +45,14 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ]
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDk1OTdBQTA1MDE1NEJBNzcKUldSM3VsUUJCYXFYbFVBU0xMbVovNlcvUXZiWXRlaTAzaFVleThrMUtIem1NZ0pYbXkvVEdVVFIK",
+      "endpoints": [
+        "https://releases.myapp.com/{{target}}/{{arch}}/{{current_version}}",
+        "https://github.com/user/repo/releases/latest/download/latest.json"
+      ]
+    }
   }
 }
